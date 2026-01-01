@@ -523,6 +523,8 @@ class OptimizedTelegramScraper:
         cursor.execute('SELECT * FROM messages ORDER BY date')
         columns = [description[0] for description in cursor.description]
 
+        if '../' in str(json_file) or '..\\' in str(json_file):
+            raise Exception('Invalid file path')
         with open(json_file, 'w', encoding='utf-8') as f:
             f.write('[\n')
             first_row = True
